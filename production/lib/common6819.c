@@ -49,6 +49,9 @@ void resetHeading(){
 	heading = 0;
 }
 
+//  Read about encoders here.
+//  http://www.education.rec.ri.cmu.edu/previews/robot_c_products/teaching_rc_tetrix_preview/sensing/forwardfordistance/documents/encoders_helper.pdf
+
 // Encoder reset
 void resetEncoders()
 {
