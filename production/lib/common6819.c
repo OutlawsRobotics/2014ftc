@@ -4,6 +4,8 @@
 //
 //
 
+// Note: Check out http://botbench.com/blog/robotc-driver-suite/
+
 //
 //  We can fine tune the robot's responsiveness here
 //
