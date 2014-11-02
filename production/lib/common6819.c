@@ -14,8 +14,18 @@ const int slowestSpeed = 10;
 int joySlow = 5;				//Slow Driving Mode
 int joySuperSlow = 6; 	//Super Slow Driving Mode
 
+// bool drivingOn = true;
+
+int defaultMovementSpeed = 50;
+int turnSpeed = 30;
+
+// float rotSpeed = 0;
+float heading = 0;
+
+
 // Allow joystick interface
 #include "joystickdriver.c"
+// #include "hitechnic-gyro.h"
 
 // Define Button hexcodes
 #define button1   0x01
@@ -34,6 +44,142 @@ int joySuperSlow = 6; 	//Super Slow Driving Mode
 //
 const bool bLogarithmicScale = true;
 const bool kMaximumPowerLevel = 100;  // Adjust to set max power level to be used.
+
+void resetHeading(){
+	heading = 0;
+}
+
+// Encoder reset
+void resetEncoders()
+{
+	nMotorEncoder[motorRight] = 0;
+	nMotorEncoder[motorLeft] = 0;
+}
+
+int inchesToEncoder(int inches)
+{
+	// Returns encoder value from inches
+	// Encoder Rotation 1024, wheel circumference = 14.92256, encoders/inch = 86.9198195873
+	return inches * 107.75;
+}
+
+// Motors may not encode at the same rate.  Average.
+int averageEncoders()
+{
+	return ((nMotorEncoder[motorRight] + nMotorEncoder[motorLeft])/2);
+}
+
+int turningEncoders(int dir)
+{
+	return (dir*(nMotorEncoder[motorRight]*-1 + nMotorEncoder[motorLeft])/2);
+}
+
+
+// Set motor speed
+void SetMotors(int setPowLeft, int setPowRight)
+{
+	//if (setPowLeft > motor[motorLeft]){
+	//	motor[motorLeft]=motor[motorLeft]+1;
+	//}
+	//else if (setPowLeft < motor[motorLeft]){
+	//	motor[motorLeft]=motor[motorLeft]-1;
+	//}
+
+	//if (setPowRight > motor[motorRight]){
+	//	motor[motorRight]=motor[motorRight]+1;
+	//}
+	//else if (setPowRight < motor[motorRight]){
+	//	motor[motorRight]=motor[motorRight]-1;
+	//}
+	motor[motorRight] =  setPowRight;
+	motor[motorLeft]  =  setPowLeft;
+}
+
+
+int moveStraight(int distance, int inchesOrEncoders = true, int speed = defaultMovementSpeed)
+{
+	resetEncoders();
+
+	int encoderDistance = 0;
+
+	if(inchesOrEncoders){
+		encoderDistance = inchesToEncoder(distance);
+	}
+	else {
+		encoderDistance = distance;
+	}
+
+	if (distance > 0){
+		SetMotors(speed,speed);
+		while (averageEncoders() < encoderDistance){
+			wait1Msec(3);
+		}
+	}
+	else{
+		SetMotors(-speed,-speed);
+		while (averageEncoders() > encoderDistance){
+			wait1Msec(3);
+		}
+	}
+
+	SetMotors(0,0);
+
+	return averageEncoders();
+}
+
+int sign(int num)
+{
+	if (num<0){ return -1;}
+	else { return 1;}
+}
+
+void turnDegrees(int deg)
+{
+	resetHeading();
+
+	SetMotors(turnSpeed*sign(deg),turnSpeed*sign(deg)*-1);
+
+	if (deg > 0){
+		while (heading < deg){
+			wait1Msec(3);
+		}
+	}
+	else{
+		while (heading > deg){
+			wait1Msec(3);
+		}
+	}
+
+	SetMotors(0,0);
+}
+
+/*
+task updateGyro(){
+	time1[T1] = 0;
+
+	while (true)
+	{
+		// Wait until 20ms has passed
+		while (time1[T1] < 20){
+			wait1Msec(1);
+		}
+
+		// Reset the timer
+		time1[T1]=0;
+
+		// Read the current rotation speed
+		rotSpeed = HTGYROreadRot(Gyro);
+
+		// Calculate the new heading by adding the amount of degrees
+		// we've turned in the last 20ms
+		// If our current rate of rotation is 100 degrees/second,
+		// then we will have turned 100 * (20/1000) = 2 degrees since
+		// the last time we measured.
+		heading += rotSpeed * 0.02;
+	}
+
+}
+*/
 
 
 // How fast are we trying to go?
@@ -89,26 +235,6 @@ void ArmControl(int y1, int y2)
 	SetCrane(powLeft, powRight);
 }
 
-
-// Set motor speed
-void SetMotors(int setPowLeft, int setPowRight)
-{
-	//if (setPowLeft > motor[motorLeft]){
-	//	motor[motorLeft]=motor[motorLeft]+1;
-	//}
-	//else if (setPowLeft < motor[motorLeft]){
-	//	motor[motorLeft]=motor[motorLeft]-1;
-	//}
-
-	//if (setPowRight > motor[motorRight]){
-	//	motor[motorRight]=motor[motorRight]+1;
-	//}
-	//else if (setPowRight < motor[motorRight]){
-	//	motor[motorRight]=motor[motorRight]-1;
-	//}
-	motor[motorRight] =  setPowRight;
-	motor[motorLeft]  =  setPowLeft;
-}
 
 
 int slowMode(int slow, int superSlow)
