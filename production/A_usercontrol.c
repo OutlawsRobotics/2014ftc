@@ -2,7 +2,6 @@
 #pragma config(Hubs,  S4, HTMotor,  none,     none,     none)
 #pragma config(Sensor, S1,     ,               sensorI2CMuxController)
 #pragma config(Sensor, S2,     MyFriendlyIR,   sensorHiTechnicIRSeeker600)
-#pragma config(Sensor, S3,     Gyro,           sensorAnalogInactive)
 #pragma config(Sensor, S4,     ,               sensorI2CMuxController)
 #pragma config(Motor,  mtr_S1_C1_1,     motorRight,    tmotorTetrix, openLoop, encoder)
 #pragma config(Motor,  mtr_S1_C1_2,     motorLeft,     tmotorTetrix, openLoop, reversed, encoder)
