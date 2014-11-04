@@ -241,7 +241,6 @@ void ArmControl(int y1, int y2)
 }
 
 
-
 int slowMode(int slow, int superSlow)
 {
 	if (slow == 1){
