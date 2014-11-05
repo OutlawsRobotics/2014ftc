@@ -232,6 +232,27 @@ void SetCrane(int setPowLeft, int setPowRight)
 	motor[ArmRaiser]  =  setPowLeft;
 }
 
+bool is_set=false;
+
+const int max_servo = 45;
+const int min_servo = 0;
+
+void SetLocks(){
+	    if(joy1Btn(2)){
+	    	is_set=!is_set;
+	    }
+	    if (is_set){
+    	servoTarget[back_left] = max_servo;
+    	servoTarget[back_right] = min_servo;
+    }
+   	else {
+   		servoTarget[back_left] = max_servo;
+   		servoTarget[back_right] = min_servo;
+
+ 	}
+ 	return;
+}
+
 void ArmControl(int y1, int y2)
 {
 	int powLeft = -(scaleJoystick(y1));   // Left  hand joystick, y value.
