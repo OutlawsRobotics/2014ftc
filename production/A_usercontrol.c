@@ -1,6 +1,11 @@
 #pragma config(Hubs,  S1, HTMotor,  none,     none,     none)
 #pragma config(Hubs,  S2, HTServo,  none,     none,     none)
 #pragma config(Hubs,  S4, HTMotor,  none,     none,     none)
+#pragma config(Sensor, S1,     ,               sensorI2CMuxController)
+#pragma config(Sensor, S2,     ,               sensorI2CMuxController)
+#pragma config(Sensor, S4,     ,               sensorI2CMuxController)
+#pragma config(Motor,  motorA,          Sweeper,       tmotorNXT, PIDControl, encoder)
+#pragma config(Motor,  motorB,          BackDoor,      tmotorNXT, PIDControl, encoder)
 #pragma config(Motor,  mtr_S1_C1_1,     motorRight,    tmotorTetrix, openLoop, encoder)
 #pragma config(Motor,  mtr_S1_C1_2,     motorLeft,     tmotorTetrix, openLoop, reversed, encoder)
 #pragma config(Motor,  mtr_S4_C1_1,     ArmRaiser,     tmotorTetrix, openLoop, encoder)
@@ -36,6 +41,8 @@ void initializeRobot()
   Muppets();
      	// servoTarget[back_left] = min_servo;
    		// servoTarget[back_right] = min_servo;
+  		eraseDisplay();
+  		writeDebugStreamLine("left: %d right: %d",ServoValue[back_left],ServoValue[back_right]);
 	return;
 }
 
@@ -62,8 +69,9 @@ task main()
   while( true ) {
 		Tank(joystick.joy1_y1, joystick.joy1_y2);
     ArmControl(joystick.joy2_y1,joystick.joy2_y2);
-		SetLocks();
- 	}
+	  SetLocks();
+ 	  SetBucket();
+		}
 
 	return;
 }

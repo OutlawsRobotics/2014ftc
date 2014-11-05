@@ -234,25 +234,45 @@ void SetCrane(int setPowLeft, int setPowRight)
 
 bool is_set=false;
 
-const int max_servo = 45;
-const int min_servo = 0;
-
-void SetLocks(){
+ const int max_servo = 128;
+ const int min_servo = 64;
+ void SetLocks(){
+   if(servoValue[back_left] != max_servo &&
+      servoValue[back_left] != min_servo){
+    	return;
+    }
+      if(servoValue[back_right] != max_servo &&
+      servoValue[back_right] != min_servo){
+    	return;
+    }
 	    if(joy1Btn(2)){
 	    	is_set=!is_set;
 	    }
 	    if (is_set){
-    	servoTarget[back_left] = max_servo;
+     	servoTarget[back_left] = max_servo;
     	servoTarget[back_right] = min_servo;
     }
    	else {
    		servoTarget[back_left] = max_servo;
-   		servoTarget[back_right] = min_servo;
+   		servoTarget[back_right] = max_servo;
 
  	}
  	return;
 }
 
+void SetBucket(){
+	// writeDebugStreamLine("TopHat: %d", joystick.joy1_TopHat);
+	if (joystick.joy1_TopHat == 0){
+		int Current=ServoValue[bucket];
+		writeDebugStreamLine("Current: %d", Current);
+		servoTarget[bucket]=Current-1;
+	}
+	else if (joystick.joy1_TopHat == 4){
+		int Current=ServoValue[bucket];
+		writeDebugStreamLine("Current: %d", Current);
+		servoTarget[bucket]=Current+1;
+	}
+}
 void ArmControl(int y1, int y2)
 {
 	int powLeft = -(scaleJoystick(y1));   // Left  hand joystick, y value.
