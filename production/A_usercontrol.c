@@ -6,8 +6,8 @@
 #pragma config(Sensor, S4,     ,               sensorI2CMuxController)
 #pragma config(Motor,  motorA,          Sweeper,       tmotorNXT, PIDControl, encoder)
 #pragma config(Motor,  motorB,          BackDoor,      tmotorNXT, PIDControl, encoder)
-#pragma config(Motor,  mtr_S1_C1_1,     motorRight,    tmotorTetrix, openLoop, encoder)
-#pragma config(Motor,  mtr_S1_C1_2,     motorLeft,     tmotorTetrix, openLoop, reversed, encoder)
+#pragma config(Motor,  mtr_S1_C1_1,     motorLeft,     tmotorTetrix, openLoop, reversed, encoder)
+#pragma config(Motor,  mtr_S1_C1_2,     motorRight,    tmotorTetrix, openLoop, encoder)
 #pragma config(Motor,  mtr_S4_C1_1,     ArmRaiser,     tmotorTetrix, openLoop, encoder)
 #pragma config(Motor,  mtr_S4_C1_2,     ArmExtender,   tmotorTetrix, openLoop, encoder)
 #pragma config(Servo,  srvo_S2_C1_1,    back_left,            tServoStandard)
@@ -69,9 +69,17 @@ task main()
   while( true ) {
 		Tank(joystick.joy1_y1, joystick.joy1_y2);
     ArmControl(joystick.joy2_y1,joystick.joy2_y2);
-	  SetLocks();
- 	  SetBucket();
-		}
+    left_back_down();
+    left_back_up();
+    right_back_down();
+    right_back_up();
+ 	  // SetBucketUp();
+ 	  // SetBucketDown();
+		ControlSweeperForward();
+		ControlSweeperBackward();
+		ControlBackdoorUp();
+		ControlBackdoorDown();
 
+ 	  }
 	return;
 }

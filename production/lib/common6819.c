@@ -232,45 +232,97 @@ void SetCrane(int setPowLeft, int setPowRight)
 	motor[ArmRaiser]  =  setPowLeft;
 }
 
-bool is_set=false;
-
- const int max_servo = 128;
- const int min_servo = 64;
- void SetLocks(){
-   if(servoValue[back_left] != max_servo &&
-      servoValue[back_left] != min_servo){
-    	return;
-    }
-      if(servoValue[back_right] != max_servo &&
-      servoValue[back_right] != min_servo){
-    	return;
-    }
-	    if(joy1Btn(2)){
-	    	is_set=!is_set;
-	    }
-	    if (is_set){
-     	servoTarget[back_left] = max_servo;
-    	servoTarget[back_right] = min_servo;
-    }
-   	else {
-   		servoTarget[back_left] = max_servo;
-   		servoTarget[back_right] = max_servo;
-
- 	}
- 	return;
+void left_back_down(){
+	getJoystickSettings(joystick);
+	// writeDebugStreamLine("TopHat: %d", joystick.joy1_TopHat);
+	if (joy1Btn(1)){
+		int Current=ServoValue[back_left];
+		//writeDebugStreamLine("Current: %d", Current);
+		servo[back_left]=Current-1;
+	}
+}
+void left_back_up(){
+	getJoystickSettings(joystick);
+	// writeDebugStreamLine("TopHat: %d", joystick.joy1_TopHat);
+	if (joy1Btn(2)){
+		int Current=ServoValue[back_left];
+		//writeDebugStreamLine("Current: %d", Current);
+		servo[back_left]=Current+1;
+	}
+}
+void right_back_down(){
+	getJoystickSettings(joystick);
+	// writeDebugStreamLine("TopHat: %d", joystick.joy1_TopHat);
+	if (joy1Btn(3)){
+		int Current=ServoValue[back_right];
+		//writeDebugStreamLine("Current: %d", Current);
+		servo[back_right]=Current-1;
+	}
+}
+void right_back_up(){
+	getJoystickSettings(joystick);
+	// writeDebugStreamLine("TopHat: %d", joystick.joy1_TopHat);
+	if (joy1Btn(4)){
+		int Current=ServoValue[back_right];
+		//writeDebugStreamLine("Current: %d", Current);
+		servo[back_right]=Current+1;
+	}
+}
+/* void SetBucketDown(){
+	getJoystickSettings(joystick);
+	// writeDebugStreamLine("TopHat: %d", joystick.joy1_TopHat);
+	if (joy2Btn(1)){
+		int Current=ServoValue[bucket];
+		writeDebugStreamLine("Current: %d", Current);
+		servo[bucket]=Current-1;
+	}
+}
+	void SetBucketUp(){
+	getJoystickSettings(joystick);
+	// writeDebugStreamLine("TopHat: %d", joystick.joy1_TopHat);
+	if (joy2Btn(2)){
+		int Current=ServoValue[bucket];
+	  writeDebugStreamLine("Current: %d", Current);
+		servo[bucket]=Current+1;
+}
+}
+*/
+    void ControlSweeperForward(){
+		getJoystickSettings(joystick);
+		if(joy2Btn(1)){
+			//writeDebugStreamLine();
+		motor[Sweeper]=100;
+		} else {
+		motor[Sweeper]=0;
+	}
+}
+void ControlSweeperBackward(){
+		getJoystickSettings(joystick);
+		if(joy2Btn(1)){
+			//writeDebugStreamLine();
+			motor[Sweeper]=-100;
+		} else {
+		motor[Sweeper]=0;
+	}
 }
 
-void SetBucket(){
-	// writeDebugStreamLine("TopHat: %d", joystick.joy1_TopHat);
-	if (joystick.joy1_TopHat == 0){
-		int Current=ServoValue[bucket];
-		writeDebugStreamLine("Current: %d", Current);
-		servoTarget[bucket]=Current-1;
+
+void ControlBackdoorUp(){
+			getJoystickSettings(joystick);
+			if(joy2Btn(2)){
+				//writeDebugStreamLine();
+				motor[BackDoor]=100;
+			} else {
+			motor[BackDoor]=0;
 	}
-	else if (joystick.joy1_TopHat == 4){
-		int Current=ServoValue[bucket];
-		writeDebugStreamLine("Current: %d", Current);
-		servoTarget[bucket]=Current+1;
+}
+		void ControlBackdoorDown(){
+			getJoystickSettings(joystick);
+			if(joy2Btn(3)){
+				//writeDebugStreamLine();
+				motor[BackDoor]=-100;
+			} else {
+			motor[BackDoor]=0;
 	}
 }
 void ArmControl(int y1, int y2)
