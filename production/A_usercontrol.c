@@ -4,15 +4,16 @@
 #pragma config(Sensor, S1,     ,               sensorI2CMuxController)
 #pragma config(Sensor, S2,     ,               sensorI2CMuxController)
 #pragma config(Sensor, S4,     ,               sensorI2CMuxController)
-#pragma config(Motor,  motorA,          Sweeper,       tmotorNXT, PIDControl, encoder)
-#pragma config(Motor,  motorB,          BackDoor,      tmotorNXT, PIDControl, encoder)
+#pragma config(Motor,  motorA,          Sweeper,       tmotorNXT, openLoop, encoder)
+#pragma config(Motor,  motorB,          BackDoor,      tmotorNXT, openLoop, encoder)
+#pragma config(Motor,  motorC,          Bucket,        tmotorNXT, openLoop, encoder)
 #pragma config(Motor,  mtr_S1_C1_1,     motorLeft,     tmotorTetrix, openLoop, reversed, encoder)
 #pragma config(Motor,  mtr_S1_C1_2,     motorRight,    tmotorTetrix, openLoop, encoder)
 #pragma config(Motor,  mtr_S4_C1_1,     ArmRaiser,     tmotorTetrix, openLoop, encoder)
 #pragma config(Motor,  mtr_S4_C1_2,     ArmExtender,   tmotorTetrix, openLoop, encoder)
 #pragma config(Servo,  srvo_S2_C1_1,    back_left,            tServoStandard)
 #pragma config(Servo,  srvo_S2_C1_2,    back_right,           tServoStandard)
-#pragma config(Servo,  srvo_S2_C1_3,    bucket,               tServoStandard)
+#pragma config(Servo,  srvo_S2_C1_3,    servo3,               tServoNone)
 #pragma config(Servo,  srvo_S2_C1_4,    servo4,               tServoNone)
 #pragma config(Servo,  srvo_S2_C1_5,    servo5,               tServoNone)
 #pragma config(Servo,  srvo_S2_C1_6,    servo6,               tServoNone)
@@ -69,12 +70,10 @@ task main()
   while( true ) {
 		Tank(joystick.joy1_y1, joystick.joy1_y2);
     ArmControl(joystick.joy2_y1,joystick.joy2_y2);
-    left_back_down();
-    left_back_up();
-    right_back_down();
-    right_back_up();
- 	  // SetBucketUp();
- 	  // SetBucketDown();
+    servoUp();
+    servoDown();
+ 	  SetBucketUp();
+ 	  SetBucketDown();
 		ControlSweeperForward();
 		ControlSweeperBackward();
 		ControlBackdoorUp();
