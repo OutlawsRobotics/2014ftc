@@ -254,7 +254,7 @@ void servoDownRT(){
 	getJoystickSettings(joystick);
 		if (joy1Btn(3)){
 		servoChangeRate[back_right]=2;
-		servo[back_right]=60;
+		servo[back_right]=10;
 		writeDebugStreamLine("back_right: %d", ServoValue[back_right]);
 
   }
