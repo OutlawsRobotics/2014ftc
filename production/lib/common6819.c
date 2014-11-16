@@ -253,16 +253,16 @@ void servoUp(){
 void servoDownRT(){
 	getJoystickSettings(joystick);
 		if (joy1Btn(3)){
-		servoChangeRate[back_right]=2;
-		servo[back_right]=120;
+		servoChangeRate[back_right]=-2;
+		servo[back_right]=-120;
 
   }
 }
 void servoUpRT(){
 	getJoystickSettings(joystick);
 		if (joy1Btn(4)){
-			servoChangeRate[back_right]=2;
-			servo[back_right]=10;
+			servoChangeRate[back_right]=-2;
+			servo[back_right]=-10;
 			// writeDebugStreamLine("back_left: %d", joystick.joy1_Buttons);
 
   }
