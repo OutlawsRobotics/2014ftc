@@ -257,18 +257,18 @@ void servoUp(){
 	getJoystickSettings(joystick);
 	// writeDebugStreamLine("TopHat: %d", joystick.joy2_TopHat);
 	if (joystick.joy2_TopHat == 0){
-		motor[Bucket]=+100;
+		servo[Bucket]=+100;
 	} else {
-		motor[Bucket]=0;
+		servo[Bucket]=0;
 	}
 }
  void SetBucketDown(){
 	getJoystickSettings(joystick);
 	// writeDebugStreamLine("TopHat: %d", joystick.joy2_TopHat);
 	if (joystick.joy2_TopHat == 4){
-		motor[Bucket]=-30;
+		servo[Bucket]=-100;
 	} else {
-    motor[Bucket]=0;
+    servo[Bucket]=0;
 	}
 }
     void ControlSweeperForward(){
