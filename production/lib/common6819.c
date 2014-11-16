@@ -245,7 +245,7 @@ void servoUp(){
 		if (joy1Btn(2)){
 			servoChangeRate[back_left]=2;
 			servo[back_left]=0;
-			writeDebugStreamLine("back_servo: %d", joystick.joy1_Buttons);
+			// writeDebugStreamLine("back_left: %d", joystick.joy1_Buttons);
 
   }
 }
