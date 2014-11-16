@@ -42,7 +42,7 @@ void initializeRobot()
      	// servoTarget[back_left] = min_servo;
    		// servoTarget[back_right] = min_servo;
   		eraseDisplay();
-  		writeDebugStreamLine("left: %d right: %d",ServoValue[back_servo],ServoValue[bucket_servo]);
+  		// writeDebugStreamLine("left: %d right: %d",ServoValue[back_servo],ServoValue[bucket_servo]);
 	return;
 }
 
