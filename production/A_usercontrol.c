@@ -71,6 +71,8 @@ task main()
     ArmControl(joystick.joy2_y1,joystick.joy2_y2);
     servoUp();
     servoDown();
+    servoUpRT();
+    servoDownRT();
  	  SetBucketUp();
  	  SetBucketDown();
 		ControlSweeperForward();
