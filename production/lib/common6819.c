@@ -235,16 +235,16 @@ void SetCrane(int setPowLeft, int setPowRight)
 void servoDown(){
 	getJoystickSettings(joystick);
 		if (joy1Btn(1)){
-		servoChangeRate[back_servo]=2;
-		servo[back_servo]=45;
+		servoChangeRate[back_left]=2;
+		servo[back_left]=45;
 
   }
 }
 void servoUp(){
 	getJoystickSettings(joystick);
 		if (joy1Btn(2)){
-			servoChangeRate[back_servo]=2;
-			servo[back_servo]=0;
+			servoChangeRate[back_left]=2;
+			servo[back_left]=0;
 			writeDebugStreamLine("back_servo: %d", joystick.joy1_Buttons);
 
   }
