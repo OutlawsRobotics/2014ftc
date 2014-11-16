@@ -6,7 +6,6 @@
 #pragma config(Sensor, S4,     ,               sensorI2CMuxController)
 #pragma config(Motor,  motorA,          Sweeper,       tmotorNXT, openLoop, encoder)
 #pragma config(Motor,  motorB,          BackDoor,      tmotorNXT, openLoop, encoder)
-#pragma config(Motor,  motorC,           ,             tmotorNXT, openLoop)
 #pragma config(Motor,  mtr_S1_C1_1,     motorLeft,     tmotorTetrix, openLoop, reversed, encoder)
 #pragma config(Motor,  mtr_S1_C1_2,     motorRight,    tmotorTetrix, openLoop, encoder)
 #pragma config(Motor,  mtr_S4_C1_1,     ArmRaiser,     tmotorTetrix, openLoop, encoder)
@@ -43,7 +42,7 @@ void initializeRobot()
      	// servoTarget[back_left] = min_servo;
    		// servoTarget[back_right] = min_servo;
   		eraseDisplay();
-  		writeDebugStreamLine("left: %d right: %d",ServoValue[back_left],ServoValue[back_right]);
+  		writeDebugStreamLine("left: %d right: %d",ServoValue[back_servo],ServoValue[bucket_servo]);
 	return;
 }
 
