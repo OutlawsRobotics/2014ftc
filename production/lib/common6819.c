@@ -236,7 +236,7 @@ void servoDown(){
 	getJoystickSettings(joystick);
 		if (joy1Btn(1)){
 		servoChangeRate[back_left]=2;
-		servo[back_left]=100;
+		servo[back_left]=120;
 
   }
 }
@@ -254,7 +254,7 @@ void servoDownRT(){
 	getJoystickSettings(joystick);
 		if (joy1Btn(3)){
 		servoChangeRate[back_right]=2;
-		servo[back_right]=100;
+		servo[back_right]=120;
 
   }
 }
