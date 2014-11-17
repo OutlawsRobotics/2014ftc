@@ -271,7 +271,7 @@ void SetBucketDown(){
 }
     void ControlSweeperForward(){
 		getJoystickSettings(joystick);
-		if(joy2Btn(1)){
+		if(joy2Btn(5)){
 			//writeDebugStreamLine();
 		motor[Sweeper]=100;
 		} else {
@@ -280,7 +280,7 @@ void SetBucketDown(){
 }
 void ControlSweeperBackward(){
 		getJoystickSettings(joystick);
-		if(joy2Btn(2)){
+		if(joy2Btn(6)){
 			//writeDebugStreamLine();
 			motor[Sweeper]=-100;
 		} else {
@@ -291,7 +291,7 @@ void ControlSweeperBackward(){
 
 void ControlBackdoorUp(){
 			getJoystickSettings(joystick);
-			if(joy2Btn(3)){
+			if(joy2Btn(7)){
 				//writeDebugStreamLine();
 				motor[BackDoor]=100;
 			} else {
@@ -300,7 +300,7 @@ void ControlBackdoorUp(){
 }
 		void ControlBackdoorDown(){
 			getJoystickSettings(joystick);
-			if(joy2Btn(4)){
+			if(joy2Btn(8)){
 				//writeDebugStreamLine();
 				motor[BackDoor]=-100;
 			} else {
