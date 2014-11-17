@@ -254,22 +254,19 @@ void servoUp(){
   }
 }
 
- void SetBucketUp(){
+void SetBucketUp(){
 	getJoystickSettings(joystick);
-	// writeDebugStreamLine("TopHat: %d", joystick.joy2_TopHat);
-	if (joystick.joy2_TopHat == 0){
-		servo[bucket_servo]=200;
-	} else {
-		servo[bucket_servo]=0;
+		if (joy2Btn(1)){
+			servoChangeRate[bucket_servo]=2;
+			servo[bucket_servo]=100;
 	}
 }
- void SetBucketDown(){
+
+void SetBucketDown(){
 	getJoystickSettings(joystick);
-	// writeDebugStreamLine("TopHat: %d", joystick.joy2_TopHat);
-	if (joystick.joy2_TopHat == 4){
-		servo[bucket_servo]=0;
-	} else {
-    servo[bucket_servo]=0;
+		if (joy2Btn(2)){
+			servoChangeRate[bucket_servo]=2;
+			servo[bucket_servo]=0;
 	}
 }
     void ControlSweeperForward(){
