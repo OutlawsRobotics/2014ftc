@@ -236,6 +236,8 @@ void servoDown(){
 	getJoystickSettings(joystick);
 		if (joy1Btn(1)){
 		servoChangeRate[back_left]=2;
+		servoChangeRate[back_right]=2;
+		servo[back_right]=220;
 		servo[back_left]=120;
 
   }
@@ -244,35 +246,19 @@ void servoUp(){
 	getJoystickSettings(joystick);
 		if (joy1Btn(2)){
 			servoChangeRate[back_left]=2;
+			servoChangeRate[back_right]=2;
+			servo[back_right]=125;
 			servo[back_left]=0;
 			// writeDebugStreamLine("back_left: %d", joystick.joy1_Buttons);
 
   }
 }
 
-void servoDownRT(){
-	getJoystickSettings(joystick);
-		if (joy1Btn(3)){
-		servoChangeRate[back_right]=2;
-		servo[back_right]=125;
-		writeDebugStreamLine("back_right: %d", ServoValue[back_right]);
-
-  }
-}
-void servoUpRT(){
-	getJoystickSettings(joystick);
-		if (joy1Btn(4)){
-			servoChangeRate[back_right]=2;
-			servo[back_right]=220;
-			// writeDebugStreamLine("back_left: %d", joystick.joy1_Buttons);
-
-  }
-}
  void SetBucketUp(){
 	getJoystickSettings(joystick);
 	// writeDebugStreamLine("TopHat: %d", joystick.joy2_TopHat);
 	if (joystick.joy2_TopHat == 0){
-		servo[bucket_servo]=+100;
+		servo[bucket_servo]=200;
 	} else {
 		servo[bucket_servo]=0;
 	}
@@ -281,7 +267,7 @@ void servoUpRT(){
 	getJoystickSettings(joystick);
 	// writeDebugStreamLine("TopHat: %d", joystick.joy2_TopHat);
 	if (joystick.joy2_TopHat == 4){
-		servo[bucket_servo]=-100;
+		servo[bucket_servo]=0;
 	} else {
     servo[bucket_servo]=0;
 	}
