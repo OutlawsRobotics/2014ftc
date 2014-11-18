@@ -20,40 +20,45 @@
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// 					User Control Mode A - from http://www.robotc.net/wiki/TETRIX_FTC_Templates
+//                           Autonomous Mode A
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////
-#include "lib/common6819.c"			// Team 6819 methods library.  Common between autonomous and user control mode.
+#include "lib/common6819.c"  // Team methods common between AU and UC modes
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-//    Support Methods - Lower level commands we'll use to command our robot.
+//                                    initializeRobot
+//
+// Prior to the start of autonomous mode, you may want to perform some initialization on your robot.
+// Things that might be performed during initialization include:
+//   1. Move motors and servos to a preset position.
+//   2. Some sensor types take a short while to reach stable values during which time it is best that
+//      robot is not moving. For example, gyro sensor needs a few seconds to obtain the background
+//      "bias" value.
+//
+// In many cases, you may not have to add any code to this function and it will remain "empty".
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void initializeRobot()
 {
-
-  // Place code here to initialize servos to starting positions.
+  // Place code here to sinitialize servos to starting positions.
   // Sensors are automatically configured and setup by ROBOTC. They may need a brief time to stabilize.
 
 	// Play to indicate we are ready to go.
   Muppets();
-     	// servoTarget[back_left] = min_servo;
-   		// servoTarget[back_right] = min_servo;
-  		eraseDisplay();
-  		// writeDebugStreamLine("left: %d right: %d",ServoValue[back_servo],ServoValue[bucket_servo]);
-	return;
+
+  return;
 }
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-//                                         Main Routine
+//  Main Autonomous Routine
 //
-// The following is the main code for the autonomous robot operation.
+//  The following is the main code for the autonomous robot operation.
 //
-// At the end of the autonomous period, the FMS will autonmatically abort (stop) execution of the program
-// and run the program defined as our User Control Script.
+//  When AU mode is done, the system will run the paired UC script.
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -61,23 +66,61 @@ task main()
 {
   initializeRobot();
 
-  waitForStart();
+  waitForStart(); // Wait for the beginning of autonomous phase.
 
-  	// User Control code goes here.
+  int seconds = 0;
+		motor[ArmRaiser]=50;
+		wait10Msec(100);
+		motor[ArmRaiser]=0;
+    	// Drive manually
+  //while ( true ) {
+		Tank( -50, -50);
+		wait10Msec(5*100); //This will add up to 5 seconds.
+		Tank ( 0, 0);
+//	}
 
-  	// Drive manually
-  while( true ) {
-		Tank(joystick.joy1_y1, joystick.joy1_y2);
-    ArmControl(joystick.joy2_y1,joystick.joy2_y2);
-    servoUp();
-    servoDown();
- 	  SetBucketDump();
- 	  SetBucketFloor();
-		ControlSweeperForward();
-		ControlSweeperBackward();
-		ControlBackdoorUp();
-		ControlBackdoorDown();
 
- 	  }
+  // Do our autonomous mode work here... some example code...
+
+/*  //int IR1value = SensorValue(MyFriendlyIR);
+	  //nxtDisplayCenteredBigTextLine( 5, "%d", IR1value );
+
+
+
+
+
+
+			//Anthing below the IR data is irrelevant
+
+
+
+
+
+			if(joystick1.joy1_y1(1) == 128)
+	  	{
+	  	nxtDisplayCenteredBigTextLine( 5, "joystick1Btn1", 1 );
+
+	  	motor[driveRight]= 25;
+		  }
+		else
+			{
+			motor[driveRight]= 0;
+		  }
+		  */
+
+
+
+  // Move forward
+ 	//motor(motorL) = 50;
+ 	//motor(motorR) = 50;
+
+  // Turn right
+ 	//motor(motorL) = 0;
+  //motor(motorR) = 50;
+  //motor(motorR) = 0;
+
+  // When done, robot will play endtone and wait for end of autonomous mode, then run user control script.
+	Cocacola();
+
 	return;
 }

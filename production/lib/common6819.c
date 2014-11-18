@@ -230,6 +230,7 @@ void SetCrane(int setPowLeft, int setPowRight)
 {
 	motor[ArmExtender] =  setPowRight;
 	motor[ArmRaiser]  =  setPowLeft;
+	writeDebugStreamLine("ArmRaiser: %d", nMotorEncoder[ArmRaiser]);
 }
 
 void servoDown(){
@@ -254,23 +255,26 @@ void servoUp(){
   }
 }
 
-void SetBucketUp(){
+void SetBucketDump(){
 	getJoystickSettings(joystick);
 		if (joy2Btn(1)){
-			servoChangeRate[bucket_servo]=2;
-			servo[bucket_servo]=100;
-			writeDebugStreamLine("bucket_servo: %d", joystick.joy2_Buttons);
+			// int Current[bucket_servo];
+			servoChangeRate[bucket_servo]=10;
+			servo[bucket_servo]=50;
+			writeDebugStreamLine("bucket_servo: %d", servo[bucket_servo]);
 	}
 }
 
-void SetBucketDown(){
+void SetBucketFloor(){
 	getJoystickSettings(joystick);
 		if (joy2Btn(2)){
-			servoChangeRate[bucket_servo]=2;
-			servo[bucket_servo]=0;
-			writeDebugStreamLine("bucket_servo: %d", joystick.joy2_Buttons)
+			// int Current[bucket_servo];
+			servoChangeRate[bucket_servo]=10;
+			servo[bucket_servo]=50;
+			writeDebugStreamLine("bucket_servo: %d", servo[bucket_servo]);
 	}
 }
+
     void ControlSweeperForward(){
 		getJoystickSettings(joystick);
 		if(joy2Btn(5)){
