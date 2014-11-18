@@ -259,6 +259,7 @@ void SetBucketUp(){
 		if (joy2Btn(1)){
 			servoChangeRate[bucket_servo]=2;
 			servo[bucket_servo]=100;
+			writeDebugStreamLine("bucket_servo: %d", joystick.joy2_Buttons);
 	}
 }
 
@@ -267,6 +268,7 @@ void SetBucketDown(){
 		if (joy2Btn(2)){
 			servoChangeRate[bucket_servo]=2;
 			servo[bucket_servo]=0;
+			writeDebugStreamLine("bucket_servo: %d", joystick.joy2_Buttons)
 	}
 }
     void ControlSweeperForward(){
