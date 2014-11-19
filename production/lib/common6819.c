@@ -228,8 +228,10 @@ int scaleJoystick(int &nJoy1, int nMaxValue = kMaximumPowerLevel)
 
 void SetCrane(int setPowLeft, int setPowRight)
 {
-	motor[ArmExtender] =  setPowRight;
-	motor[ArmRaiser]  =  setPowLeft;
+	int powLeft  = scaleJoystick(setPowLeft);   // Left  hand joystick, y value.
+	int powRight = scaleJoystick(setPowRight);   // Right hand joystick, y value.
+	motor[ArmExtender] =  PowRight;
+	motor[ArmRaiser]  =  PowLeft;
 	writeDebugStreamLine("ArmRaiser: %d", nMotorEncoder[ArmRaiser]);
 }
 
@@ -270,7 +272,7 @@ void SetBucketFloor(){
 		if (joy2Btn(2)){
 			// int Current[bucket_servo];
 			servoChangeRate[bucket_servo]=10;
-			servo[bucket_servo]=50;
+			servo[bucket_servo]=10;
 			writeDebugStreamLine("bucket_servo: %d", servo[bucket_servo]);
 	}
 }

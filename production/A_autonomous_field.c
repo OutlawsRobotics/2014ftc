@@ -73,11 +73,16 @@ task main()
 		wait10Msec(100);
 		motor[ArmRaiser]=0;
     	// Drive manually
-  //while ( true ) {
 		Tank( -50, -50);
 		wait10Msec(5*100); //This will add up to 5 seconds.
 		Tank ( 0, 0);
-//	}
+		Muppets();
+		Tank( 50, 50);
+		wait10Msec(.25*100); //This will add up to a 4th of a second.
+		Tank ( 50, 0);
+		wait10Msec(.1*100); //This will add up to a 10th of a second.
+		Tank ( -50, -50);
+		wait10Msec(2*100); //This will add up to a 5 seconds.
 
 
   // Do our autonomous mode work here... some example code...
