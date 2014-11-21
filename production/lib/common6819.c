@@ -230,9 +230,9 @@ void SetCrane(int setPowLeft, int setPowRight)
 {
 	int powLeft  = scaleJoystick(setPowLeft);   // Left  hand joystick, y value.
 	int powRight = scaleJoystick(setPowRight);   // Right hand joystick, y value.
-	motor[ArmExtender] =  PowRight;
-	motor[ArmRaiser]  =  PowLeft;
-	writeDebugStreamLine("ArmRaiser: %d", nMotorEncoder[ArmRaiser]);
+	motor[ArmExtender] =  powRight;
+	motor[ArmRaiser]  =  powLeft;
+	writeDebugStreamLine("ArmRaiser: %d", powLeft);
 }
 
 void servoDown(){
@@ -240,7 +240,7 @@ void servoDown(){
 		if (joy1Btn(1)){
 		servoChangeRate[back_left]=2;
 		servoChangeRate[back_right]=2;
-		servo[back_right]=220;
+		servo[back_right]=125;
 		servo[back_left]=120;
 
   }
@@ -250,14 +250,14 @@ void servoUp(){
 		if (joy1Btn(2)){
 			servoChangeRate[back_left]=2;
 			servoChangeRate[back_right]=2;
-			servo[back_right]=125;
+			servo[back_right]=220;
 			servo[back_left]=0;
 			// writeDebugStreamLine("back_left: %d", joystick.joy1_Buttons);
 
   }
 }
 
-void SetBucketDump(){
+/* void SetBucketDump(){
 	getJoystickSettings(joystick);
 		if (joy2Btn(1)){
 			// int Current[bucket_servo];
@@ -281,21 +281,11 @@ void SetBucketFloor(){
 		getJoystickSettings(joystick);
 		if(joy2Btn(5)){
 			//writeDebugStreamLine();
-		motor[Sweeper]=100;
+		motor[Sweeper]=+100;
 		} else {
 		motor[Sweeper]=0;
 	}
 }
-void ControlSweeperBackward(){
-		getJoystickSettings(joystick);
-		if(joy2Btn(6)){
-			//writeDebugStreamLine();
-			motor[Sweeper]=-100;
-		} else {
-		motor[Sweeper]=0;
-	}
-}
-
 
 void ControlBackdoorUp(){
 			getJoystickSettings(joystick);
@@ -315,6 +305,53 @@ void ControlBackdoorUp(){
 			motor[BackDoor]=0;
 	}
 }
+*/
+
+// This is our pouncer. This helps us collect balls.
+
+void pouncer(){
+	// Forward
+	if(joy2Btn(4)){
+		SetMotors(50, 50);
+		wait10Msec(.25*100);
+		SetMotors(0, 0);
+		SetCrane(-100, 0);
+		wait10Msec(.35*100);
+		SetCrane(0, 0);
+		SetCrane(100, 0);
+		wait10Msec(.65*100);
+		SetCrane(0, 0);
+
+	}
+	// Left
+		if(joy2Btn(1)){
+		SetMotors(25, 75);
+		wait10Msec(.25*100);
+		SetMotors(0, 0);
+		SetCrane(-100, 0);
+		wait10Msec(.35*100);
+		SetCrane(0, 0);
+		SetCrane(100, 0);
+		wait10Msec(.65*100);
+		SetCrane(0, 0);
+
+	}
+	// Right
+		if(joy2Btn(3)){
+		SetMotors(75, 25);
+		wait10Msec(.25*100);
+		SetMotors(0, 0);
+		SetCrane(-100, 0);
+		wait10Msec(.35*100);
+		SetCrane(0, 0);
+		SetCrane(100, 0);
+		wait10Msec(.65*100);
+		SetCrane(0, 0);
+
+	}
+}
+
+
 void ArmControl(int y1, int y2)
 {
 	int powLeft = -(scaleJoystick(y1));   // Left  hand joystick, y value.

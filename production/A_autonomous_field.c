@@ -81,10 +81,41 @@ task main()
 		wait10Msec(.25*100); //This will add up to a 4th of a second.
 		Tank ( 50, 0);
 		wait10Msec(.1*100); //This will add up to a 10th of a second.
-		Tank ( -50, -50);
-		wait10Msec(2*100); //This will add up to a 5 seconds.
-
-
+		Tank ( -100, -100);
+		Tank( 50, 50);
+		wait10Msec(.25*100); //This will add up to a 4th of a second.
+		Tank ( 50, 0);
+		wait10Msec(.1*100); //This will add up to a 10th of a second.
+		Tank ( -100, -100);
+		Tank( 50, 50);
+		wait10Msec(.25*100); //This will add up to a 4th of a second.
+		Tank ( 50, 0);
+		wait10Msec(.1*100); //This will add up to a 10th of a second.
+		Tank ( -100, -100);
+		Tank( 50, 50);
+		wait10Msec(.25*100); //This will add up to a 4th of a second.
+		Tank ( 50, 0);
+		wait10Msec(.1*100); //This will add up to a 10th of a second.
+		Tank ( -100, -100);Tank( 50, 50);
+		wait10Msec(.25*100); //This will add up to a 4th of a second.
+		Tank ( 50, 0);
+		wait10Msec(.1*100); //This will add up to a 10th of a second.
+		Tank ( -100, -100);
+		Tank( 50, 50);
+		wait10Msec(.25*100); //This will add up to a 4th of a second.
+		Tank ( 50, 0);
+		wait10Msec(.1*100); //This will add up to a 10th of a second.
+		Tank ( -100, -100);
+		Tank( 50, 50);
+		wait10Msec(.25*100); //This will add up to a 4th of a second.
+		Tank ( 50, 0);
+		wait10Msec(.1*100); //This will add up to a 10th of a second.
+		Tank ( -100, -100);
+		Tank( 50, 50);
+		wait10Msec(.25*100); //This will add up to a 4th of a second.
+		Tank ( 50, 0);
+		wait10Msec(.1*100); //This will add up to a 10th of a second.
+		Tank ( -100, -100);
   // Do our autonomous mode work here... some example code...
 
 /*  //int IR1value = SensorValue(MyFriendlyIR);
