@@ -1,0 +1,25 @@
+to-do night before meet:
+1. Charge all batteries
+2. Pack chargers
+3. Bring extra supplies
+4. Organize Supplies
+5. Make sure we have everything we need to compete
+
+between match to do:
+
+1. Reset servos
+2. Check wiring for disconnects or severs
+3. Reset arm.
+4. Check Cabling
+5. Re-attach samantha module to USB.
+6. Turn on robot.
+7. Pay attention to when our team number is called
+
+Ramp Autonomous checklist:
+
+1. Line up robot parallel with wall.
+	a. Make sure it drives straight off ramp.
+
+Field autonomous checklist:
+
+Depending on the position of the center structure, angle the robot to be aimed at the stick.
