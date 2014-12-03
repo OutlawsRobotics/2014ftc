@@ -232,7 +232,7 @@ void SetCrane(int setPowLeft, int setPowRight)
 	int powRight = scaleJoystick(setPowRight);   // Right hand joystick, y value.
 	motor[ArmExtender] =  powRight;
 	motor[ArmRaiser]  =  powLeft;
-	writeDebugStreamLine("ArmRaiser: %d", powLeft);
+//	writeDebugStreamLine("ArmRaiser: %d", powLeft);
 }
 
 void servoDown(){
@@ -240,8 +240,8 @@ void servoDown(){
 		if (joy1Btn(1)){
 		servoChangeRate[back_left]=2;
 		servoChangeRate[back_right]=2;
-		servo[back_right]=125;
-		servo[back_left]=120;
+		servo[back_right]=160;
+		servo[back_left]=45;
 
   }
 }
@@ -256,6 +256,25 @@ void servoUp(){
 
   }
 }
+
+bool tankSpeed = true;
+bool armSpeed = true;
+
+void setControlSpeed(){
+	getJoystickSettings(joystick);
+		if (joy1Btn(8)){
+			tankSpeed = !tankSpeed;
+			writeDebugStreamLine("TankSpeed %d", tankSpeed);
+			wait10Msec(25);
+	}
+			if (joy2Btn(8)){
+			armSpeed = !armSpeed;
+			writeDebugStreamLine("armSpeed %d", armSpeed);
+			wait10Msec(25);
+	}
+}
+
+
 
 /* void SetBucketDump(){
 	getJoystickSettings(joystick);
@@ -347,7 +366,14 @@ void pouncer(){
 		SetCrane(100, 0);
 		wait10Msec(.65*100);
 		SetCrane(0, 0);
-
+}
+	// No move
+		if(joy2Btn(2)){
+    SetCrane(-100, 0);
+    wait10Msec(.35*100);
+  	SetCrane(0, 0);
+  	SetCrane(100, 0);
+  	wait10Msec(.65*100);
 	}
 }
 
@@ -356,6 +382,11 @@ void ArmControl(int y1, int y2)
 {
 	int powLeft = -(scaleJoystick(y1));   // Left  hand joystick, y value.
 	int powRight = (scaleJoystick(y2));   // Right hand joystick, y value.
+	if (!armSpeed){
+	// This defines our speed.
+	powLeft = powLeft/2;
+	powRight = powRight/2;
+	}
 
 	SetCrane(powLeft, powRight);
 }
@@ -385,8 +416,14 @@ void Tank(int y1, int y2)
 {
 	int powLeft  = scaleJoystick(y1)/slowMode(joy1Btn(joySlow),joy1Btn(joySuperSlow))*1.0;   // Left  hand joystick, y value.
 	int powRight = scaleJoystick(y2)/slowMode(joy1Btn(joySlow),joy1Btn(joySuperSlow))*1.0;   // Right hand joystick, y value.
-
+	if (!tankSpeed){
+	// This defines our speed.
+	powLeft = powLeft/6;
+	powRight = powRight/6;
+	}
 	SetMotors(powLeft, powRight);
+
+//	writeDebugStreamLine("scaleJoystick %d %d", y1, y2);
 }
 
 
