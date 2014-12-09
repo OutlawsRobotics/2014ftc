@@ -73,54 +73,26 @@ task main()
 		wait10Msec(100);
 		motor[ArmRaiser]=0;
     	// Drive manually
-		Tank( -50, -50);
-		wait10Msec(5*100); //This will add up to 5 seconds.
+		Tank( -100, -100);
+		wait10Msec(3*100); //This will add up to 5 seconds.
 		Tank ( 0, 0);
 		Muppets();
-		Tank( 50, 50);
-		wait10Msec(.25*100); //This will add up to a 4th of a second.
-		Tank ( 50, 0);
+
+		while(true){
+
+		Tank( 100, 100);
+		wait10Msec(.55*100); //This will add up to a 4th of a second.
+		Tank ( 100, 0);
 		wait10Msec(.1*100); //This will add up to a 10th of a second.
 		Tank ( -100, -100);
-		Tank( 50, 50);
-		wait10Msec(.25*100); //This will add up to a 4th of a second.
-		Tank ( 50, 0);
-		wait10Msec(.1*100); //This will add up to a 10th of a second.
-		Tank ( -100, -100);
-		Tank( 50, 50);
-		wait10Msec(.25*100); //This will add up to a 4th of a second.
-		Tank ( 50, 0);
-		wait10Msec(.1*100); //This will add up to a 10th of a second.
-		Tank ( -100, -100);
-		Tank( 50, 50);
-		wait10Msec(.25*100); //This will add up to a 4th of a second.
-		Tank ( 50, 0);
-		wait10Msec(.1*100); //This will add up to a 10th of a second.
-		Tank ( -100, -100);Tank( 50, 50);
-		wait10Msec(.25*100); //This will add up to a 4th of a second.
-		Tank ( 50, 0);
-		wait10Msec(.1*100); //This will add up to a 10th of a second.
-		Tank ( -100, -100);
-		Tank( 50, 50);
-		wait10Msec(.25*100); //This will add up to a 4th of a second.
-		Tank ( 50, 0);
-		wait10Msec(.1*100); //This will add up to a 10th of a second.
-		Tank ( -100, -100);
-		Tank( 50, 50);
-		wait10Msec(.25*100); //This will add up to a 4th of a second.
-		Tank ( 50, 0);
-		wait10Msec(.1*100); //This will add up to a 10th of a second.
-		Tank ( -100, -100);
-		Tank( 50, 50);
-		wait10Msec(.25*100); //This will add up to a 4th of a second.
-		Tank ( 50, 0);
-		wait10Msec(.1*100); //This will add up to a 10th of a second.
-		Tank ( -100, -100);
+		wait10Msec(.95*100);
+}
+
   // Do our autonomous mode work here... some example code...
 
 /*  //int IR1value = SensorValue(MyFriendlyIR);
 	  //nxtDisplayCenteredBigTextLine( 5, "%d", IR1value );
-
+5
 
 
 

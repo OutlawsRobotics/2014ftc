@@ -4,7 +4,7 @@ to-do night before meet:
 3. Bring extra supplies
 4. Organize Supplies
 5. Make sure we have everything we need to compete
-
+6. Check WiFi connection with samantha module. (check for the jitteryness when driving)
 between match to do:
 
 1. Reset servos
