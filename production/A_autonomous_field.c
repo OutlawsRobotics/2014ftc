@@ -47,6 +47,7 @@ void initializeRobot()
 
 	// Play to indicate we are ready to go.
   Muppets();
+  ArmInit();
 
   return;
 }
@@ -69,23 +70,24 @@ task main()
   waitForStart(); // Wait for the beginning of autonomous phase.
 
   int seconds = 0;
-		motor[ArmRaiser]=50;
-		wait10Msec(100);
-		motor[ArmRaiser]=0;
+  	Arm45(); // Set the Arm from 0 to 45.
     	// Drive manually
 		Tank( -100, -100);
 		wait10Msec(3*100); //This will add up to 5 seconds.
 		Tank ( 0, 0);
 		Muppets();
-
+		int counter = 0;
 		while(true){
-
+		counter = counter+1;
 		Tank( 100, 100);
 		wait10Msec(.55*100); //This will add up to a 4th of a second.
 		Tank ( 100, 0);
 		wait10Msec(.1*100); //This will add up to a 10th of a second.
 		Tank ( -100, -100);
 		wait10Msec(.95*100);
+		if (counter == 6) {
+			break;
+		}
 }
 
   // Do our autonomous mode work here... some example code...

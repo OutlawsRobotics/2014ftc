@@ -69,9 +69,7 @@ task main()
   waitForStart(); // Wait for the beginning of autonomous phase.
 
   int seconds = 0;
-		motor[ArmRaiser]=50;
-		wait10Msec(100);
-		motor[ArmRaiser]=0;
+		Arm45();
     	// Drive manually
   	Tank( 100, 100);
 		wait10Msec(3*100);
@@ -79,20 +77,24 @@ task main()
 		wait10Msec(1.7*100);
 		Tank(100, 100);
 		wait10Msec(3*100);
+		int counter = 0;
 		while(true){
+		counter = counter+1;
 		Tank( 100, 100);
 		wait10Msec(.95*100); //This will add up to a 4th of a second.
 		Tank ( 100, 0);
-		wait10Msec(.1*100); //This will add up to a 10th of a second.
+		wait10Msec(.15*100); //This will add up to a 10th of a second.
 		Tank ( -100, -100);
 		wait10Msec(.65*100);
+			if (counter == 6) {
+				break;
+		}
 }
-
 
   // Do our autonomous mode work here... some example code...
 
-/*  //int IR1value = SensorValue(MyFriendlyIR);
-	  //nxtDisplayCenteredBigTextLine( 5, "%d", IR1value );
+/* int IR1value = SensorValue(MyFriendlyIR);
+    nxtDisplayCenteredBigTextLine( 5, "%d", IR1value );
 
 
 
@@ -115,7 +117,6 @@ task main()
 			{
 			motor[driveRight]= 0;
 		  }
-		  */
 
 
 
@@ -127,7 +128,7 @@ task main()
  	//motor(motorL) = 0;
   //motor(motorR) = 50;
   //motor(motorR) = 0;
-
+*/
   // When done, robot will play endtone and wait for end of autonomous mode, then run user control script.
 	Cocacola();
 
