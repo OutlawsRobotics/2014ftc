@@ -1,7 +1,7 @@
 #pragma config(Hubs,  S1, HTMotor,  none,     none,     none)
 #pragma config(Hubs,  S2, HTServo,  none,     none,     none)
 #pragma config(Hubs,  S4, HTMotor,  none,     none,     none)
-#pragma config(Sensor, S3,     MyFriendlySonar, sensorSONAR)
+#pragma config(Sensor, S3,     HTSMUX,         sensorI2CCustom)
 #pragma config(Motor,  motorA,          Sweeper,       tmotorNXT, openLoop, encoder)
 #pragma config(Motor,  motorB,          BackDoor,      tmotorNXT, openLoop, encoder)
 #pragma config(Motor,  mtr_S1_C1_1,     motorLeft,     tmotorTetrix, openLoop, reversed, encoder)
@@ -22,6 +22,22 @@
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 #include "lib/common6819.c"  // Team methods common between AU and UC modes
+#include "drivers/suite/drivers/hitechnic-sensormux.h"
+
+// Assuming the Sensor MUX is connected to NXT sensor port 4 (S4)
+// Assuming the following sensors are connected to the Sensor MUX ports:
+// Port 1: IR
+// Port 2: Sonar
+// Port 3: Gyro
+// Port 4: Not used
+#include "drivers/suite/drivers/hitechnic-gyro.h"    //for gyro sensor
+#include "drivers/suite/drivers/lego-ultrasound.h"    //for sonar sensor
+#include "drivers/suite/drivers/hitechnic-irseeker-v2.h"    //for IR seeker sensor
+
+#define IRSensor                msensor_S3_2
+#define sonarSensor             msensor_S3_1
+#define gyroSensor              msensor_S3_3
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 //
@@ -45,7 +61,7 @@ void initializeRobot()
 
 	// Play to indicate we are ready to go.
   Muppets();
-
+  clearDebugStream();
   return;
 }
 
@@ -73,9 +89,22 @@ task main()
 		Tank ( 0, 0); */
 
 
-		int Sonar1value = SensorValue(MyFriendlySonar);
+		int Sonar1value = USreadDist(sonarSensor);
 
+    writeDebugStreamLine("Sonar Value: %d", Sonar1value);
 
-    writeDebugStreamLine("Value: %d", Sonar1value);
+    int IR1value = HTIRS2readACDir(IRSensor);
+
+    writeDebugStreamLine("IR Value: %d", IR1value);
+
+    int Gyro1value = HTGYROreadRot(gyroSensor);
+
+    writeDebugStreamLine("Gyro Value: %d", Gyro1value);
+
+    HTGYROstartCal(gyroSensor);
+// int gyroRotation = HTGYROreadRot(gyroSensor);
+// int distanceInCM = USreadDist(sonarSensor);
+// int irACDirection = HTIRS2readACDir(IRSensor);
+
 
 }

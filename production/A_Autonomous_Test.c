@@ -1,7 +1,7 @@
 #pragma config(Hubs,  S1, HTMotor,  none,     none,     none)
 #pragma config(Hubs,  S2, HTServo,  none,     none,     none)
 #pragma config(Hubs,  S4, HTMotor,  none,     none,     none)
-#pragma config(Sensor, S3,     MyFriendlyIR,   sensorHiTechnicIRSeeker1200)
+#pragma config(Sensor, S3,     MyFriendlySonar, sensorSONAR)
 #pragma config(Motor,  motorA,          Sweeper,       tmotorNXT, openLoop, encoder)
 #pragma config(Motor,  motorB,          BackDoor,      tmotorNXT, openLoop, encoder)
 #pragma config(Motor,  mtr_S1_C1_1,     motorLeft,     tmotorTetrix, openLoop, reversed, encoder)
@@ -71,7 +71,7 @@ task main()
     Tank( 100, 100);
 		wait10Msec(400);
 		Tank ( 0, 0); */
-  	int IR1value = SensorValue(MyFriendlyIR);
-    writeDebugStreamLine("IRValue: %d", IR1value);
+  	int Sonar1value = SensorValue(MyFriendlySonar);
+    writeDebugStreamLine("Sonar Value: %d", Sonar1value);
 
 }
