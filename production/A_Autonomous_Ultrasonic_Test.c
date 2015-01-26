@@ -21,7 +21,7 @@
 //                           Autonomous Mode A
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////
-#include "lib/common6819.c"  // Team methods common between AU and UC modes
+#include "lib/auto6819.c"  // Team methods common between AU and UC modes
 #include "drivers/suite/drivers/hitechnic-sensormux.h"
 
 // Assuming the Sensor MUX is connected to NXT sensor port 4 (S4)

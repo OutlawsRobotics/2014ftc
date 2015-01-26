@@ -9,6 +9,7 @@
 //
 //  We can fine tune the robot's responsiveness here
 //
+
 const int slowSpeed = 3;
 const int superSlowSpeed = 6;
 const int slowestSpeed = 10;
@@ -52,6 +53,7 @@ void Muppets()
   //    Quarter = Default note length
   //        10% = Break between notes
   //
+
   PlayTone(  523,   11); wait1Msec( 120);  // Note(C, Duration(Eighth))
   PlayTone(  587,   11); wait1Msec( 120);  // Note(D, Duration(Eighth))
   PlayTone(  659,   22); wait1Msec( 240);  // Note(E)
@@ -72,6 +74,7 @@ void Cocacola()
   //    Quarter = Default note length
   //        10% = Break between notes
   //
+
   PlayTone(  988,   22); wait1Msec( 240);  // Note(E6, Duration(Eighth))
   PlayTone( 1320,   22); wait1Msec( 240);  // Note(A6, Duration(Eighth))
   PlayTone( 1109,   43); wait1Msec( 480);  // Note(F#6)
@@ -83,6 +86,7 @@ void Cocacola()
 //
 //  Scales joysticks on Log scale for precise slow movement
 //
+
 const bool bLogarithmicScale = true;
 const bool kMaximumPowerLevel = 100;  // Adjust to set max power level to be used.
 
@@ -94,6 +98,7 @@ void resetHeading(){
 //  http://www.education.rec.ri.cmu.edu/previews/robot_c_products/teaching_rc_tetrix_preview/sensing/forwardfordistance/documents/encoders_helper.pdf
 
 // Encoder reset
+
 void resetEncoders()
 {
 	nMotorEncoder[motorRight] = 0;
@@ -104,10 +109,12 @@ int inchesToEncoder(int inches)
 {
 	// Returns encoder value from inches
 	// Encoder Rotation 1024, wheel circumference = 14.92256, encoders/inch = 86.9198195873
+
 	return inches * 107.75;
 }
 
 // Motors may not encode at the same rate.  Average.
+
 int averageEncoders()
 {
 	return ((nMotorEncoder[motorRight] + nMotorEncoder[motorLeft])/2);
@@ -120,6 +127,7 @@ int turningEncoders(int dir)
 
 
 // Set motor speed
+
 void SetMotors(int setPowLeft, int setPowRight)
 {
 	//if (setPowLeft > motor[motorLeft]){
@@ -135,6 +143,7 @@ void SetMotors(int setPowLeft, int setPowRight)
 	//else if (setPowRight < motor[motorRight]){
 	//	motor[motorRight]=motor[motorRight]-1;
 	//}
+
 	motor[motorRight] =  setPowRight;
 	motor[motorLeft]  =  setPowLeft;
 }
@@ -159,6 +168,7 @@ int moveStraight(int distance, int inchesOrEncoders = true, int speed = defaultM
 			wait1Msec(3);
 		}
 	}
+
 	else{
 		SetMotors(-speed,-speed);
 		while (averageEncoders() > encoderDistance){
@@ -172,12 +182,14 @@ int moveStraight(int distance, int inchesOrEncoders = true, int speed = defaultM
 }
 
 int sign(int num)
+
 {
 	if (num<0){ return -1;}
 	else { return 1;}
 }
 
 void turnDegrees(int deg)
+
 {
 	resetHeading();
 
@@ -407,6 +419,13 @@ void pouncer(){
 	}
 }
 
+  void IRDump {
+  	motor[ArmRaiser] = 100;
+    wait10Msec(5);
+    motor[ArmExtender] = 100;
+    wait10Msec(5);
+    Dump();
+  }
 
 void ArmControl(int y1, int y2)
 {

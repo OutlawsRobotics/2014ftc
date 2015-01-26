@@ -69,9 +69,9 @@ task main()
 
   waitForStart(); // Wait for the beginning of autonomous phase.
 
-  int seconds = 0;
+    int seconds = 0;
   	Arm45(); // Set the Arm from 0 to 45.
-    	// Drive manually
+    // Drive manually
 		Tank( -100, -100);
 		wait10Msec(3*100); //This will add up to 5 seconds.
 		Tank ( 0, 0);
@@ -86,48 +86,11 @@ task main()
 		Tank ( -100, -100);
 		wait10Msec(.95*100);
 		if (counter == 6) {
-			break;
+		break;
 		}
 }
 
   // Do our autonomous mode work here... some example code...
-
-/*  //int IR1value = SensorValue(MyFriendlyIR);
-	  //nxtDisplayCenteredBigTextLine( 5, "%d", IR1value );
-5
-
-
-
-
-
-			//Anthing below the IR data is irrelevant
-
-
-
-
-
-			if(joystick1.joy1_y1(1) == 128)
-	  	{
-	  	nxtDisplayCenteredBigTextLine( 5, "joystick1Btn1", 1 );
-
-	  	motor[driveRight]= 25;
-		  }
-		else
-			{
-			motor[driveRight]= 0;
-		  }
-		  */
-
-
-
-  // Move forward
- 	//motor(motorL) = 50;
- 	//motor(motorR) = 50;
-
-  // Turn right
- 	//motor(motorL) = 0;
-  //motor(motorR) = 50;
-  //motor(motorR) = 0;
 
   // When done, robot will play endtone and wait for end of autonomous mode, then run user control script.
 	Cocacola();
