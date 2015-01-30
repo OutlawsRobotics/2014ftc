@@ -21,8 +21,10 @@
 //                           Autonomous Mode A
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////
-#include "lib/auto6819.c"  // Team methods common between AU and UC modes
 #include "drivers/suite/drivers/hitechnic-sensormux.h"
+#include "lib/common6819.c"
+//#include "lib/auto6819.c"  // Team methods common between AU and UC modes
+
 
 // Assuming the Sensor MUX is connected to NXT sensor port 4 (S4)
 // Assuming the following sensors are connected to the Sensor MUX ports:
@@ -74,8 +76,79 @@ void initializeRobot()
 //
 //  When AU mode is done, the system will run the paired UC script.
 //
-/////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
+const int BACKWARDS_DRIVE_TIME_MS	= 100;
+const int LONG_SONAR_VALUE	= 60;
+
+
+void SetIR(){
+
+	// Drive backwards, approach structure
+	motor[motorRight] = -100;
+  motor[motorLeft] = -100;
+  wait10Msec( BACKWARDS_DRIVE_TIME_MS );
+
+  // Read the IR sensor
+  int IRVal = HTIRS2readACDir(IRSensor);
+	writeDebugStreamLine("IR Value: %d", IRVal);
+  // Read the Ultrasonic Distance Sensor
+	int Sonar1value = USreadDist(sonarSensor);
+	writeDebugStreamLine("Sonar Value: %d", Sonar1value);
+
+	// Is this position 1?
+	if( IRVal == 5 && Sonar1value < LONG_SONAR_VALUE ) {
+
+		// Position 1, we are close.  Move straight ahead carefully, then dump.
+
+		motor[motorRight] = -50;
+    motor[motorLeft] = -50;
+    wait10Msec(20);
+
+    IRDump();
+
+  // Is this position 3?
+	} else if( Sonar1value > LONG_SONAR_VALUE) {
+
+		// Turn, drive and reapproach the 90deg structure
+
+			// Left Turn Forward
+			motor[motorRight] = 50;
+      motor[motorLeft] = 0;
+      wait10Msec(50);
+
+      // Backwards
+			motor[motorRight] = -100;
+      motor[motorLeft] = -100;
+      wait10Msec(75);
+
+      // Right Turn Forward
+      motor[motorLeft] = 50;
+      motor[motorRight] = 0;
+      wait10Msec(50);
+      IRDump();
+
+  // Must be position 2
+  } else {
+
+		// Back up, turn and reapproach the 45deg structure
+    motor[motorLeft] = 50;
+    motor[motorRight] = 0;
+    wait10Msec(25);
+
+    motor[motorRight] = 50;
+    motor[motorLeft] = 0;
+    wait10Msec(25);
+    IRDump();
+
+	}
+  // Read the IR sensor
+  IRVal = HTIRS2readACDir(IRSensor);
+	writeDebugStreamLine("IR Value: %d", IRVal);
+  // Read the Ultrasonic Distance Sensor
+	Sonar1value = USreadDist(sonarSensor);
+	writeDebugStreamLine("Sonar Value: %d", Sonar1value);
+}
 task main()
 {
   initializeRobot();
@@ -83,10 +156,7 @@ task main()
   waitForStart(); // Wait for the beginning of autonomous phase.
 
     int seconds = 0;
-		/* Arm45();
-    Tank( 100, 100);
-		wait10Msec(400);
-		Tank ( 0, 0); */
+		Arm45();
 
 
 		int Sonar1value = USreadDist(sonarSensor);
@@ -101,7 +171,9 @@ task main()
 
     writeDebugStreamLine("Gyro Value: %d", Gyro1value);
 
-    HTGYROstartCal(gyroSensor);
+//    HTGYROstartCal(gyroSensor);
+
+    SetIR();
 // int gyroRotation = HTGYROreadRot(gyroSensor);
 // int distanceInCM = USreadDist(sonarSensor);
 // int irACDirection = HTIRS2readACDir(IRSensor);

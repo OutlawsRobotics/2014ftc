@@ -419,7 +419,7 @@ void pouncer(){
 	}
 }
 
-  void IRDump {
+  void IRDump() {
   	motor[ArmRaiser] = 100;
     wait10Msec(5);
     motor[ArmExtender] = 100;
