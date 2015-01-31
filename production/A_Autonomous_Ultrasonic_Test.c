@@ -149,6 +149,43 @@ void SetIR(){
 	Sonar1value = USreadDist(sonarSensor);
 	writeDebugStreamLine("Sonar Value: %d", Sonar1value);
 }
+
+// Turn the bot -- left, right, 
+function turnbot( direction, degrees ) {
+
+  // Record the gyro offset
+  int gyroOffset = HTGYROreadRot(gyroSensor);
+  writeDebugStreamLine("Gyro Value: %d", gyroOffset);
+
+  
+  // https://www.hitechnic.com/cgi-bin/commerce.cgi?preadd=action&key=NGY1044
+  // http://www.robotc.net/blog/2014/02/24/teacher-pov-gyro-sensor/
+  // Determine are we going left or right?
+  if ( direction == 'left' ) {
+    degrees = degrees * -1;
+  }
+
+  // Turn the direction we want until we exceed the number of degrees
+  repeatUntil( ( HTGYROreadRot(gyroSensor) - gyroOffset ) >= degrees  ) {
+    if ( direction == 'left' ) {
+      motor[motorRight] = 50;
+      motor[motorLeft] = -50;
+      wait10Msec(10);
+    } else {
+      motor[motorRight] = -50;
+      motor[motorLeft] = 50;
+      wait10Msec(10);
+    }
+  }
+
+  motor[motorRight] = 0;
+  motor[motorLeft] = 0;
+
+  return;
+  
+}
+
+
 task main()
 {
   initializeRobot();
@@ -159,7 +196,7 @@ task main()
 		Arm45();
 
 
-		int Sonar1value = USreadDist(sonarSensor);
+/*		int Sonar1value = USreadDist(sonarSensor);
 
     writeDebugStreamLine("Sonar Value: %d", Sonar1value);
 
@@ -169,11 +206,12 @@ task main()
 
     int Gyro1value = HTGYROreadRot(gyroSensor);
 
-    writeDebugStreamLine("Gyro Value: %d", Gyro1value);
+    writeDebugStreamLine("Gyro Value: %d", Gyro1value); */
 
 //    HTGYROstartCal(gyroSensor);
 
-    SetIR();
+//    SetIR();
+    turnbot( "left", 45 );
 // int gyroRotation = HTGYROreadRot(gyroSensor);
 // int distanceInCM = USreadDist(sonarSensor);
 // int irACDirection = HTIRS2readACDir(IRSensor);
