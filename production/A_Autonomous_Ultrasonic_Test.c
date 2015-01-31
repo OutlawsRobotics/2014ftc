@@ -81,6 +81,9 @@ void initializeRobot()
 const int BACKWARDS_DRIVE_TIME_MS	= 100;
 const int LONG_SONAR_VALUE	= 60;
 
+const int TURNRIGHT = 0;
+const int TURNLEFT = 1;
+
 
 void SetIR(){
 
@@ -151,7 +154,7 @@ void SetIR(){
 }
 
 // Turn the bot -- left, right, 
-function turnbot( direction, degrees ) {
+void turnbot( int direction, int degrees ) {
 
   // Record the gyro offset
   int gyroOffset = HTGYROreadRot(gyroSensor);
@@ -161,13 +164,13 @@ function turnbot( direction, degrees ) {
   // https://www.hitechnic.com/cgi-bin/commerce.cgi?preadd=action&key=NGY1044
   // http://www.robotc.net/blog/2014/02/24/teacher-pov-gyro-sensor/
   // Determine are we going left or right?
-  if ( direction == 'left' ) {
+  if ( direction == TURNLEFT ) {
     degrees = degrees * -1;
   }
 
   // Turn the direction we want until we exceed the number of degrees
   repeatUntil( ( HTGYROreadRot(gyroSensor) - gyroOffset ) >= degrees  ) {
-    if ( direction == 'left' ) {
+    if ( direction == TURNLEFT ) {
       motor[motorRight] = 50;
       motor[motorLeft] = -50;
       wait10Msec(10);
@@ -211,7 +214,7 @@ task main()
 //    HTGYROstartCal(gyroSensor);
 
 //    SetIR();
-    turnbot( "left", 45 );
+    turnbot( TURNLEFT, 45 );
 // int gyroRotation = HTGYROreadRot(gyroSensor);
 // int distanceInCM = USreadDist(sonarSensor);
 // int irACDirection = HTIRS2readACDir(IRSensor);
