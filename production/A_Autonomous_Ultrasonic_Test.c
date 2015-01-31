@@ -169,7 +169,8 @@ void turnbot( int direction, int degrees ) {
   }
 
   // Turn the direction we want until we exceed the number of degrees
-  repeatUntil( ( HTGYROreadRot(gyroSensor) - gyroOffset ) >= degrees  ) {
+  gyroVal = HTGYROreadRot(gyroSensor);
+  while( ( gyroVal - gyroOffset ) >= degrees  ) {
     if ( direction == TURNLEFT ) {
       motor[motorRight] = 50;
       motor[motorLeft] = -50;
@@ -179,6 +180,7 @@ void turnbot( int direction, int degrees ) {
       motor[motorLeft] = 50;
       wait10Msec(10);
     }
+    gyroVal = HTGYROreadRot(gyroSensor);
   }
 
   motor[motorRight] = 0;
